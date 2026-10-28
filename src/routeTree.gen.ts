@@ -10,12 +10,42 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CaseStudyRouteImport } from './routes/case-study'
+import { Route as TodoRouteImport } from './routes/todo'
+import { Route as UpcomingRouteImport } from './routes/upcoming'
+import { Route as AssignmentIdIndexRouteImport } from './routes/assignment.$id.index'
+import { Route as AssignmentIdSubmittedRouteImport } from './routes/assignment.$id.submitted'
 import { Route as ClassClassIdIndexRouteImport } from './routes/class.$classId.index'
 import { Route as ClassClassIdClassworkRouteImport } from './routes/class.$classId.classwork'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseStudyRoute = CaseStudyRouteImport.update({
+  id: '/case-study',
+  path: '/case-study',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TodoRoute = TodoRouteImport.update({
+  id: '/todo',
+  path: '/todo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UpcomingRoute = UpcomingRouteImport.update({
+  id: '/upcoming',
+  path: '/upcoming',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssignmentIdIndexRoute = AssignmentIdIndexRouteImport.update({
+  id: '/assignment/$id/',
+  path: '/assignment/$id/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssignmentIdSubmittedRoute = AssignmentIdSubmittedRouteImport.update({
+  id: '/assignment/$id/submitted',
+  path: '/assignment/$id/submitted',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ClassClassIdIndexRoute = ClassClassIdIndexRouteImport.update({
@@ -31,31 +61,76 @@ const ClassClassIdClassworkRoute = ClassClassIdClassworkRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/case-study': typeof CaseStudyRoute
+  '/todo': typeof TodoRoute
+  '/upcoming': typeof UpcomingRoute
+  '/assignment/$id/submitted': typeof AssignmentIdSubmittedRoute
   '/class/$classId/classwork': typeof ClassClassIdClassworkRoute
+  '/assignment/$id/': typeof AssignmentIdIndexRoute
   '/class/$classId/': typeof ClassClassIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/case-study': typeof CaseStudyRoute
+  '/todo': typeof TodoRoute
+  '/upcoming': typeof UpcomingRoute
+  '/assignment/$id/submitted': typeof AssignmentIdSubmittedRoute
   '/class/$classId/classwork': typeof ClassClassIdClassworkRoute
+  '/assignment/$id': typeof AssignmentIdIndexRoute
   '/class/$classId': typeof ClassClassIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/case-study': typeof CaseStudyRoute
+  '/todo': typeof TodoRoute
+  '/upcoming': typeof UpcomingRoute
+  '/assignment/$id/submitted': typeof AssignmentIdSubmittedRoute
   '/class/$classId/classwork': typeof ClassClassIdClassworkRoute
+  '/assignment/$id/': typeof AssignmentIdIndexRoute
   '/class/$classId/': typeof ClassClassIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/class/$classId/classwork' | '/class/$classId/'
+  fullPaths:
+    | '/'
+    | '/case-study'
+    | '/todo'
+    | '/upcoming'
+    | '/assignment/$id/submitted'
+    | '/class/$classId/classwork'
+    | '/assignment/$id/'
+    | '/class/$classId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/class/$classId/classwork' | '/class/$classId'
-  id: '__root__' | '/' | '/class/$classId/classwork' | '/class/$classId/'
+  to:
+    | '/'
+    | '/case-study'
+    | '/todo'
+    | '/upcoming'
+    | '/assignment/$id/submitted'
+    | '/class/$classId/classwork'
+    | '/assignment/$id'
+    | '/class/$classId'
+  id:
+    | '__root__'
+    | '/'
+    | '/case-study'
+    | '/todo'
+    | '/upcoming'
+    | '/assignment/$id/submitted'
+    | '/class/$classId/classwork'
+    | '/assignment/$id/'
+    | '/class/$classId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CaseStudyRoute: typeof CaseStudyRoute
+  TodoRoute: typeof TodoRoute
+  UpcomingRoute: typeof UpcomingRoute
+  AssignmentIdSubmittedRoute: typeof AssignmentIdSubmittedRoute
   ClassClassIdClassworkRoute: typeof ClassClassIdClassworkRoute
+  AssignmentIdIndexRoute: typeof AssignmentIdIndexRoute
   ClassClassIdIndexRoute: typeof ClassClassIdIndexRoute
 }
 
@@ -66,6 +141,41 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case-study': {
+      id: '/case-study'
+      path: '/case-study'
+      fullPath: '/case-study'
+      preLoaderRoute: typeof CaseStudyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/todo': {
+      id: '/todo'
+      path: '/todo'
+      fullPath: '/todo'
+      preLoaderRoute: typeof TodoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/upcoming': {
+      id: '/upcoming'
+      path: '/upcoming'
+      fullPath: '/upcoming'
+      preLoaderRoute: typeof UpcomingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assignment/$id/': {
+      id: '/assignment/$id/'
+      path: '/assignment/$id'
+      fullPath: '/assignment/$id/'
+      preLoaderRoute: typeof AssignmentIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assignment/$id/submitted': {
+      id: '/assignment/$id/submitted'
+      path: '/assignment/$id/submitted'
+      fullPath: '/assignment/$id/submitted'
+      preLoaderRoute: typeof AssignmentIdSubmittedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/class/$classId/': {
@@ -87,7 +197,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CaseStudyRoute: CaseStudyRoute,
+  TodoRoute: TodoRoute,
+  UpcomingRoute: UpcomingRoute,
+  AssignmentIdSubmittedRoute: AssignmentIdSubmittedRoute,
   ClassClassIdClassworkRoute: ClassClassIdClassworkRoute,
+  AssignmentIdIndexRoute: AssignmentIdIndexRoute,
   ClassClassIdIndexRoute: ClassClassIdIndexRoute,
 }
 export const routeTree = rootRouteImport
