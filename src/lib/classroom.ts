@@ -106,11 +106,11 @@ export const actions = {
   reset() { state = { submissions: {}, drafts: {} }; emit(); },
 };
 
-export type Status = "assigned" | "due-soon" | "missing" | "done" | "done-late";
+export type Status = "assigned" | "due-soon" | "missing" | "done";
 /** Status rules: done if submitted; missing if due date passed (days < 0); due-soon if due within 2 days. */
 export function statusOf(w: Work, s: State): Status {
   const sub = s.submissions[w.id];
-  if (sub) return w.dueOffsetDays !== undefined && w.dueOffsetDays < 0 && !s.submissions[w.id]?.submittedAt.startsWith("20") ? "done-late" : "done";
+  if (sub) return "done";
   if (w.dueOffsetDays === undefined) return "assigned";
   if (w.dueOffsetDays < 0) return "missing";
   if (w.dueOffsetDays <= 2) return "due-soon";
